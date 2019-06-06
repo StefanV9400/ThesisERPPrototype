@@ -1,0 +1,151 @@
+﻿
+@using VERPS.WebApp.Models.General
+@model StateMessage
+@{
+    var iconSuccess = "fa-thumbs-up";
+    var iconFailed = "fa-thumbs-down";
+    var iconWarning = "fa-info";
+    var titleSuccess = "Succes";
+    var titleFailed = "Mislukt";
+    var titleWarning = "Waarschuwing";
+    var colorsucces = "alert-success";
+    var colorFailed = "alert-danger";
+    var colorWarning = "alert-warning";
+    var badgeSuccess = "badge-success";
+    var badgeFailed = "badge-danger";
+    var badgeWarning = "badge-warning";
+
+    var Color = "";
+    var Icon = "";
+    var Title = "";
+    var Message = "";
+    var Badge = "";
+
+
+    switch (Model)
+    {
+        case StateMessage.SuccessSave:
+            Title = titleSuccess;
+            Icon = iconSuccess;
+            Color = colorsucces;
+            Message = "Gegevens succesvol opgeslagen.";
+            Badge = badgeSuccess;
+            break;
+        case StateMessage.SuccessRemovedUser:
+            Title = titleSuccess;
+            Icon = iconSuccess;
+            Color = colorsucces;
+            Message = "Gebruiker succesvol verwijderd.";
+            Badge = badgeSuccess;
+            break;
+        case StateMessage.SuccessSendingOrder:
+            Title = titleSuccess;
+            Icon = iconSuccess;
+            Color = colorsucces;
+            Message = "Uw order is succesvol verzonden!";
+            Badge = badgeSuccess;
+            break;
+        case StateMessage.SuccessRemovedOrder:
+            Title = titleSuccess;
+            Icon = iconSuccess;
+            Color = colorsucces;
+            Message = "Order is succesvol verwijderd!";
+            Badge = badgeSuccess;
+            break;
+        case StateMessage.SuccessAddedItems:
+            Title = titleSuccess;
+            Icon = iconSuccess;
+            Color = colorsucces;
+            Message = "Succesvol product(en) toegevoegd!";
+            Badge = badgeSuccess;
+            break;
+        case StateMessage.WarningNotCreatedYet:
+            Title = titleWarning;
+            Icon = iconWarning;
+            Color = colorWarning;
+            Message = "Het is nog niet opgeslagen.";
+            Badge = badgeWarning;
+            break;
+        case StateMessage.FailedSave:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Er is iets misgegaan tijdens het opslaan.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedMissingInfo:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Niet alle verplichte gegevens zijn correct ingevuld.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedNotCorrectFilledIn:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Gegevens niet correct ingevuld.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedUsernameExists:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Gebruikersnaam is al gebruik.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedUserNotFound:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Gebruiker niet gevonden.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedSendingOrder:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Order is niet verzonden";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedNoExactConnection:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Niet verbonden met Exact, log opnieuw in.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedOrderDoesNotExist:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "Order is niet gevonden.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedPaymentConditionMissing:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "U hebt nog geen betalingsconditie geselecteerd.";
+            Badge = badgeFailed;
+            break;
+        case StateMessage.FailedOrderCreatorMissing:
+            Title = titleFailed;
+            Icon = iconFailed;
+            Color = colorFailed;
+            Message = "U hebt nog geen inkoper geselecteerd.";
+            Badge = badgeFailed;
+            break;
+
+    }
+}
+@if (!string.IsNullOrWhiteSpace(Message))
+{
+    <div class="sufee-alert alert with-close @Color alert-dismissible fade show">
+        <span class="badge badge-pill @Badge"><i class="fa @Icon"></i></span>
+        @Message
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+}

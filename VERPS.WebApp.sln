@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VERPS.WebApp", "VERPS.WebApp\VERPS.WebApp.csproj", "{6A423301-778B-4E47-9A6A-72E744C841DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VERPS.WebApp.Database", "VERPS.WebApp.Database\VERPS.WebApp.Database.csproj", "{801DF16D-6E60-4C60-870F-6DD7658EA095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vendors", "Vendors", "{3E2E0460-AE01-4E15-AA01-90E92CC94CD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExactOnline", "ExactOnline", "{9AAB034A-7543-4971-9E45-34C732D5903B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExactOnline.CustomAuth", "ExactOnline.CustomAuth\ExactOnline.CustomAuth.csproj", "{4541628D-F543-413E-ACD7-6FBC7828BF90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExactOnline.Models", "ExactOnline.Models\ExactOnline.Models.csproj", "{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A423301-778B-4E47-9A6A-72E744C841DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A423301-778B-4E47-9A6A-72E744C841DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A423301-778B-4E47-9A6A-72E744C841DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A423301-778B-4E47-9A6A-72E744C841DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801DF16D-6E60-4C60-870F-6DD7658EA095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801DF16D-6E60-4C60-870F-6DD7658EA095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801DF16D-6E60-4C60-870F-6DD7658EA095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801DF16D-6E60-4C60-870F-6DD7658EA095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4541628D-F543-413E-ACD7-6FBC7828BF90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4541628D-F543-413E-ACD7-6FBC7828BF90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4541628D-F543-413E-ACD7-6FBC7828BF90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4541628D-F543-413E-ACD7-6FBC7828BF90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AAB034A-7543-4971-9E45-34C732D5903B} = {3E2E0460-AE01-4E15-AA01-90E92CC94CD4}
+		{4541628D-F543-413E-ACD7-6FBC7828BF90} = {9AAB034A-7543-4971-9E45-34C732D5903B}
+		{7EA6CC12-C614-4CF9-89A2-9A45B9C9971A} = {9AAB034A-7543-4971-9E45-34C732D5903B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F2E005B-C29D-4EAE-ABD5-38C0A249CDBD}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,47 @@
+﻿@model Areas.ExactOnline.Models.SupplierConfig.SupplierConfigVM
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer loc
+
+@Html.Partial("_stateMessagePartial", Model.StateMessage)
+
+<form>
+
+    <input asp-for="Id" hidden />
+    <input asp-for="SupplierId" hidden />
+    <div class="form-group">
+        <label class="control-label" asp-for="SupplierName">@loc["Leverancier"]</label>
+        <input class="form-control" type="text" asp-for="SupplierName" readonly />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Email">@loc["Email"]</label>
+        <input class="form-control" type="text" asp-for="Email" readonly />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Phone">@loc["Telefoon"]</label>
+        <input class="form-control" type="text" asp-for="Phone" readonly />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="City">@loc["Stad"]</label>
+        <input class="form-control" type="text" asp-for="City" readonly />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="VATNumber">@loc["KVKnummer"]</label>
+        <input class="form-control" type="text" asp-for="VATNumber" readonly />
+    </div>
+    <div class="form-group">
+        <label class="control-label" asp-for="Website">@loc["Website"]</label>
+        <input class="form-control" type="text" asp-for="Website" readonly />
+    </div>
+
+
+
+</form>
+
+<form asp-controller="SupplierConfig" asp-action="ConfigureOrder" asp-area="ExactOnline" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label" asp-for="Website">@loc["Importeer een order"]</label>
+        <input class="form-control-file" type="file" name="file"/>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>
+

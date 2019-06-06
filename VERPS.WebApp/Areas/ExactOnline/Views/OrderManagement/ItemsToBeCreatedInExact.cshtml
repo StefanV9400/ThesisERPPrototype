@@ -1,0 +1,35 @@
+﻿@model Areas.ExactOnline.Models.OrderManagement.ItemsToBeCreatedVM
+@{
+    ViewData["Title"] = "ItemsToBeCreated";
+}
+
+<h1>De volgende items van <b> @Model.SupplierName </b> staan nog niet in uw Exact omgeving:</h1>
+
+<div class="container">
+    <div class="col-md-12">
+        <form class="form-group" asp-action="CreateToBeCreatedItems" asp-controller="OrderManagement" asp-area="ExactOnline">
+            <input asp-for="OrderId" hidden />
+            @for (var x = 0; x < Model.Items.Count(); x++)
+            {
+                <div class="col-md-6 thumbnail" style=" box-shadow:inset 0px 0px 0px 2px #0079a1;margin-bottom:10px;">
+
+                    <h3>@Model.Items[x].Description</h3>
+                    <label class="control-label">Code</label>
+                    <input class="form-control" name="Items[@x].Code" value="@Model.Items[x].Code" />
+
+                    <label class="control-label">Productgroep</label>
+                    <select class="form-control" asp-for="Items[@x].ItemGroup" asp-items="@Model.ItemGroups.OrderByDescending(y => y.Text).ToList()"></select>
+                    <input class="form-control hidden" name="Items[@x].Description" value="@Model.Items[x].Description" hidden />
+                    <small id="emailHelp" class="form-text text-muted">Vul de productcode van het product voor hoe het in Exact wordt opgeslagen.</small>
+                </div>
+            }
+            <div class="col-md-12">
+                <input class="btn btn-primary" type="submit" value="Voeg producten toe aan Exact" style="width:100%;" />
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+

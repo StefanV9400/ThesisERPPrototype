@@ -1,0 +1,97 @@
+﻿@model Areas.ExactOnline.Models.SupplierConfig.OrderConfigVM
+
+
+<div class="row">
+    <div class="col-md-10">
+        <form asp-controller="OrderManagement" asp-action="SendOrder" asp-area="ExactOnline" method="post">
+            <div class="row" id="yourCertainId">
+                <!--- FIRST -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input asp-for="Id" hidden />
+                        <label class="control-label" asp-for="Description"></label>
+
+                        <input class="form-control" asp-for="Description" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="SupplierName">Leverancier</label>
+                        <input class="form-control" asp-for="SupplierName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Created"></label>
+                        <input type="datetime" class="form-control" asp-for="Created" readonly value="@DateTime.Now" />
+                    </div>
+                </div>
+
+                <!--- SECOND -->
+                <div class="col-md-4">
+                    <div class="form-groExactup">
+                        <label class="control-label" asp-for="OrderNumber" Exact></label>
+                        <input class="form-control" asp-for="OrderNumber" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="YourRef"></label>
+                        <input class="form-control" asp-for="YourRef" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Document"></label>
+                        <input type="file" class="form-control-file" asp-for="Document" />
+                    </div>
+                </div>
+                <!--- THIRD -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="OrderDate"></label>
+                        <input type="datetime" class="form-control" asp-for="OrderDate" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="PaymentConditionId"></label>
+                        <input class="form-control" asp-for="PaymentConditionId" />
+                    </div>
+                </div>
+                <!--- LINES -->
+                <table class="table display" id="linesTable">
+                    <thead class="thead-dark" style="background-color:deepskyblue">
+                        <tr>
+                            <th scope="col" style="width:50%;">Artikel</th>
+                            <th scope="col">Omschrijving</th>
+                            <th scope="col">Aantal</th>
+                            <th scope="col">Eenheid</th>
+                            <th scope="col">Netto</th>
+                            <th scope="col">Ontvangst datum</th>
+                            <th scope="col">BTW</th>
+                            <th scope="col">BTW Percentage</th>
+                            <th scope="col">Totaal</th>
+                            <th scope="col">Totaal BTW</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:50%;"><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="form_result">
+
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-2">
+        @foreach(var x in Model.ListOfElements)
+        {
+            @x <br />
+        }
+    </div>
+</div>

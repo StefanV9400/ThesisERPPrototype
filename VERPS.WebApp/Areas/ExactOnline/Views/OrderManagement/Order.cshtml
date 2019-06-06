@@ -1,0 +1,191 @@
+﻿@model  Areas.ExactOnline.Models.OrderManagement.ExactOrderVM
+@{
+    ViewData["Title"] = "Order";
+}
+
+@if (Model.CreatedItems.Any())
+{
+    foreach (var x in Model.CreatedItems)
+    {
+        <div class="alert alert-success " style="margin-top:20px">
+            <i></i>  <strong>@x</strong> opgeslagen in uw Exact omgeving
+        </div>
+    }
+
+}
+<form asp-controller="OrderManagement" asp-action="SendOrder" asp-area="ExactOnline" method="post">
+    <div class="row" id="yourCertainId">
+        <!--- FIRST -->
+        <div class="col-md-12">
+            <div class="form-group">
+                <input asp-for="Id" hidden />
+                <label class="control-label" asp-for="Description"></label>
+                @if(Model.IsStoredInExact){
+                     <input class="form-control" asp-for="Description" readonly/>
+                }else{
+                     <input class="form-control" asp-for="Description" />
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="SupplierName">Leverancier</label>
+                <input class="form-control" asp-for="SupplierName" readonly />
+            </div>
+            <input asp-for="PaymentConditionId" hidden />
+            <input class="form-control" asp-for="CreatorId" hidden />
+            @*<div class="form-group">
+                <label class="control-label" asp-for="Created"></label>
+                <input type="datetime" class="form-control" asp-for="Created" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="Currency"></label>
+                <input Exactclass="form-control" asp-for="Currency" disabled />
+            </div>*@
+        </div>
+
+        <!--- SECOND -->
+        @*<div class="col-md-4">
+            <div class="form-groExactup">
+                <label class="control-label" asp-for="OrderNumber"Exact></label>
+                <input class="form-control" asp-for="OrderNumber" disabled />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="YourRef"></label>
+                <input class="form-control" asp-for="YourRef" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="Document"></label>
+                <input type="file" class="form-control-file" asp-for="Document" />
+            </div>
+        </div>*@
+        <!--- THIRD -->
+        @*<div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" asp-for="OrderDate"></label>
+                <input type="datetime" class="form-control" asp-for="OrderDate" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="PaymentConditionId"></label>
+                <input class="form-control" asp-for="PaymentConditionId" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="CreatorId"></label>
+                <input class="form-control" asp-for="CreatorId" disabled />
+            </div>
+        </div>*@
+        <!--- LINES -->
+        <table class="table display" id="linesTable">
+            <thead class="thead-primary" style="background-color:orange;">
+                <tr>
+                    <th scope="col">Artikel</th>
+                    <th scope="col">Omschrijving</th>
+                    <th scope="col">Aantal</th>
+                    <th scope="col">Eenheid</th>
+                    <th scope="col">Netto</th>
+                    <th scope="col">Ontvangst datum</th>
+                    <th scope="col">BTW</th>
+                    <th scope="col">BTW Percentage</th>
+                    <th scope="col">Totaal</th>
+                    <th scope="col">Totaal BTW</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Doorbelasten</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var i = 0;
+                    double totalAmount = 0;
+                }
+                @foreach (var x in Model.Lines)
+                {
+                    var amount = (x.AmountDC * x.Quantity);
+                    <tr>
+                        <th scope="row" class="item_@i">@x.Item.Name</th>
+                        <td class="description_@i">@x.Description</td>
+                        <td class="quantity_@i">@x.Quantity</td>
+                        <td class="unit_@i">@x.Unit</td>
+                        <td class="netPrice_@i">€ @x.NetPrice</td>
+                        <td class="receiptDate_@i" onloadstart="SetInput('item.name', '@i ', '@x.Item.Name')">@x.ReceiptDate-</td>
+                        <td class="vatCode_@i">€ @x.VATCode</td>
+                        <td class="vatPercentage_@i">@x.VATPercentage %</td>
+                        <td class="amountDC_@i">€ @amount</td>
+                        <td class="vatAmount_@i">€ @x.VATAmount</td>
+                        <td class="project_@i">@x.Project</td>
+                        <td>-</td>
+                    </tr>
+
+                    totalAmount = totalAmount + amount.Value;
+
+                    i++;
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Totaal:</td>
+                    <th scope="row">€ @totalAmount</th>
+                    <td>€ @Model.Lines.Select(x => x.VATAmount).Sum()</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="form_result">
+
+    </div>
+    @{
+        if (!Model.IsStoredInExact)
+        {
+            <div class="col-md-12">
+                <input type="submit" value="Verstuur!" class="btn btn-primary" style="width:100%;" />
+            </div>
+        }
+    }
+
+</form>
+
+@section Scripts{
+    <script>function SetInput(name, num, value) {
+
+            var div = $('#form_result');
+
+            div.append('<input type="text" name="Lines[' + num + '].' + name + '" value="' + value + '" hidden />')
+        }</script>
+
+    @{
+        var y = 0;
+    }
+    @foreach (var x in Model.Lines)
+    {
+
+
+
+        <script>
+            SetInput('Id', @y, '@x.Id')
+            SetInput('ItemId', @y, '@x.Item.ExactId')
+            SetInput('description', @y, '@x.Description')
+            SetInput('quantity', @y, '@x.Quantity')
+            SetInput('netPrice', @y, '@x.NetPrice')
+            SetInput('receiptDate', @y, '@x.ReceiptDate')
+            SetInput('vatCode', @y, '@x.VATCode')
+            SetInput('vatPercentage', @y, '@x.VATPercentage')
+            SetInput('amountDC', @y, '@x.AmountDC')
+            SetInput('vatAmount', @y, '@x.VATAmount')
+            SetInput('project', @y, '@x.Project')
+
+        </script>
+
+        y = y + 1;
+
+    }
+
+
+}
+
+

@@ -1,0 +1,15 @@
+﻿@model List<string>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer loc
+@{
+    ViewData["Title"] = "Import";
+}
+
+@if (Model != null)
+{
+    @foreach (var x in Model)
+    {
+        @x
+        <br />
+    }
+}

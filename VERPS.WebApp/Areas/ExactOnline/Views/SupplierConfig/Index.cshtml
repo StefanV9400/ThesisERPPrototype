@@ -1,0 +1,67 @@
+﻿@model Areas.ExactOnline.Models.SupplierConfig.IndexVM
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer loc
+@{
+    ViewData["Title"] = "Leveranciers";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@loc["Leverancier"]</th>
+                <th>@loc["Acties"]:</th>
+                <th>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#suppliersModal">@loc["Voeg toe"]</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ExactSupplierConfigs != null)
+            {
+                @foreach (var x in Model.ExactSupplierConfigs)
+                {
+                    <tr>
+                        <th scope="row">@x.SupplierName</th>
+                        <td><button class="btn btn-success">@loc["Open"]</button></td>
+                        <td><button class="btn btn-danger">@loc["Verwijder"]</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- MODAL -->
+<div class="modal" id="suppliersModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">@loc["Leverancier toevoegen"]</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form asp-action="SupplierConfigForm" asp-controller="SupplierConfig" asp-area="ExactOnline" method="post">
+                    <div class="form-group">
+                        <label class="control-label">@loc["Leverancier"]</label>
+                        <select class="form-control" name="SupplierId" asp-items="Model.SuppliersSelectList"></select>
+                    </div>
+                    <input id="submitBtn" type="submit" class="btn btn-primary" value="@loc["Aanmaken"]" hidden />
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('submitBtn').click();">@loc["Aanmaken"]</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@loc["Sluit"]</button>
+            </div>
+
+        </div>
+    </div>
+</div>

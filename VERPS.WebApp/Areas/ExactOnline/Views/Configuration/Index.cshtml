@@ -1,0 +1,83 @@
+﻿@model VERPS.WebApp.Areas.ExactOnline.Models.Configuration.ConfigVM
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer loc
+
+@{
+    ViewData["Title"] = "Configuration";
+}
+
+@Html.Partial("_stateMessagePartial", Model.StateMessage)
+
+@*<form asp-action="SaveConfiguration" asp-controller="Configuration" asp-area="ExactOnline">
+        <input asp-for="ConfigurationId" hidden />
+        <input asp-for="UserId" hidden />
+        <div class="form-group">
+            <label class="control-label" asp-for="DivisionId"></label>
+            <select class="form-control" asp-for="DivisionId" asp-items="@Model.Divisions"></select>
+            <small class="form-text text-muted">@loc["Selecteer de juiste administratie."]</small>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="SupplierId"></label>
+            <select class="form-control" asp-for="SupplierId" asp-items="@Model.Suppliers"></select>
+            <small class="form-text text-muted">@loc["Selecteer de juiste leverancier."]</small>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="PaymentConditionId"></label>
+            <select class="form-control" asp-for="PaymentConditionId" asp-items="@Model.PaymentConditions"></select>
+            <small class="form-text text-muted">@loc["Selecteer de juiste betalingsconditie."]</small>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="ItemGroupId"></label>
+            <select class="form-control" asp-for="ItemGroupId" asp-items="@Model.ItemGroups"></select>
+            <small class="form-text text-muted">@loc["Selecteer de juiste productgroep."]</small>
+        </div>
+        <input type="submit" class="btn btn-primary" value="@loc["Opslaan"]" />
+    </form>*@
+
+<div class="row" style="margin-top:50px;">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <h1>Mijn configuratie</h1>
+        <form asp-controller="Configuration" asp-action="SaveConfiguration" asp-area="ExactOnline" method="post">
+            <input asp-for="ConfigurationId" hidden />
+            <input asp-for="UserId" hidden />
+
+            <div class="form-group">
+                <label class="control-label" asp-for="SupplierId"></label>
+                <select class="form-control" asp-for="SupplierId" asp-items="@Model.Suppliers"></select>
+                <small id="emailHelp" class="form-text text-muted">Selecteer een standaard leverancier.</small>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="DivisionId"></label>
+                <select class="form-control" asp-for="DivisionId" asp-items="@Model.Divisions"></select>
+                <small id="emailHelp" class="form-text text-muted">Selecteer uw administratie waar de gegevens vandaan gehaald worden en opgeslagen.</small>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" asp-for="PaymentConditionId"></label>
+                <select class="form-control" asp-for="PaymentConditionId" asp-items="@Model.PaymentConditions"></select>
+                <small id="emailHelp" class="form-text text-muted">Selecteer een standaard betalingsconditie voor elke bestelling.</small>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="ItemGroupId"></label>
+                <select class="form-control" asp-for="ItemGroupId" asp-items="Model.ItemGroups"></select>
+                <small id="emailHelp" class="form-text text-muted">Selecteer een standaard productgroep voor elk product.</small>
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="ConfigType"></label> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#configTypeModal" >
+                    <span class="fa fa-info"></span>
+                </button>
+                <select class="form-control" asp-for="ConfigType" asp-items="@Html.GetEnumSelectList(typeof(VERPS.WebApp.Database.Enums.ConfigType))"></select>
+                <small id="emailHelp" class="form-text text-muted">Selecteer de manier van opslaan.</small>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Wijzig" style="width:100%;" />
+        </form>
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+
+
+<!-- Modal -->
+@Html.Partial("../Partials/Modals/_configTypeExplanationPartial.cshtml")

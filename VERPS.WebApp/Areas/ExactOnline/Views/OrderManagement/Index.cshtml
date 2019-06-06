@@ -1,0 +1,54 @@
+﻿@model Areas.ExactOnline.Models.OrderManagement.IndexVM
+@Html.Partial("_stateMessagePartial", Model.StateMessage)
+@{
+    ViewData["Title"] = "Orders";
+}
+
+
+@{
+
+    var caption = Model.IsOpenOrderPage ? "Openstaande orders die verwerkt kan worden." : "Orders die zijn opgeslagen in Exact.";
+}
+
+<div class="row">
+    <table class="table display">
+        <caption>@caption</caption>
+        <thead>
+            <tr>
+                <th>Leverancier</th>
+                <th>Aangemaakt</th>
+                <th>Aantal producten</th>
+                <th>Totaal</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Orders != null)
+            {
+
+                @foreach (var x in Model.Orders)
+                {
+                    <tr>
+                        <td>@x.SupplierName</td>
+                        <td>@x.Created</td>
+                        <td>@x.AmountofLines</td>
+                        <td>€ @x.Total</td>
+                        <td>
+                            <button class="btn btn-success" onclick="location.href='@Url.Action("Order", "OrderManagement", new { id = x.Id})'">Open</button>
+                           
+                          </td>
+                        <td>   @if (Model.IsOpenOrderPage)
+                            {
+                                <form asp-action="Delete" asp-controller="OrderManagement" asp-area="ExactOnline">
+                                    <input name="Id" value="@x.Id" hidden />
+                                    <input type="submit" class="btn btn-danger" value="Verwijder"/>
+                                </form>
+                            }</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
